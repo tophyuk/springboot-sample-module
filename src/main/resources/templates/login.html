@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form id="form" method="post">
+      <input type="text" name="memberId" /> 아이디 입력
+      <input type="password" name="password" /> 패스워드 입력
+        <button type="submit">로그인</button>
+    </form>
+
+    <div class="method">
+        <div class="method-control">
+            <a href="/oauth2/authorization/google" class="method-action google">
+                <ion-icon class="ion-logo-google" size="large" src="/img/google.svg"></ion-icon>
+                <span>구글 로그인</span>
+            </a>
+        </div>
+        <div class="method-control">
+            <a href="/oauth2/authorization/kakao" class="method-action kakao">
+                <ion-icon class="ion ion-logo-kakao" size="large" src="/img/kakao.svg"></ion-icon>
+                <span>카카오 로그인</span>
+            </a>
+        </div>
+        <div class="method-control method-naver">
+            <a href="/oauth2/authorization/naver" class="method-action naver">
+                <ion-icon class="ion ion-logo-naver" size="large" src="/img/naver.svg"></ion-icon>
+                <span>네이버 로그인</span>
+            </a>
+        </div>
+
+</body>
+</html>
+
+
+<script>
+		var formsubmitSerialArray = $("#form").serializeArray();
+		var formsubmit = JSON.stringify(objectifyForm(formsubmitSerialArray));
+		console.log(formsubmit);
+
+            $.ajax({
+					url : "/auth/login",
+					type : "POST",
+					accept : "application/json",
+					contentType : "application/json; charset=utf-8",
+					dataType : "json",
+					headers: {"Authorization": localStorage.getItem('Authorization')}
+					data : {
+					    "memberId": "shj8278",
+                        "password": "test!@34"
+                    },
+					success : function(json) {
+						console.log(json);
+
+					},
+					error : function(request, status, error) {
+						console.log(status);
+
+					}
+
+				});
+
+</script>
